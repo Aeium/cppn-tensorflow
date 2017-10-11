@@ -95,6 +95,15 @@ class CPPN():
     x_unroll = tf.reshape(self.x, [self.batch_size*n_points, 1])
     y_unroll = tf.reshape(self.y, [self.batch_size*n_points, 1])
     r_unroll = tf.reshape(self.r, [self.batch_size*n_points, 1])
+    
+    #print z_unroll.get_shape()
+    #print x_unroll.get_shape()
+    #print y_unroll.get_shape()
+    #print r_unroll.get_shape()
+    
+    #print self.x
+    
+    #print self.batch_size #* n_points
 
     U = fully_connected(z_unroll, net_size, 'g_0_z') + \
         fully_connected(x_unroll, net_size, 'g_0_x', with_bias = False) + \
@@ -182,8 +191,20 @@ class CPPN():
     # sample from Gaussian distribution
 
     G = self.generator(x_dim = x_dim, y_dim = y_dim, reuse = True)
+    #x_vec, y_vec, r_vec = self._coordinates(x_dim, y_dim, scale = scale)
     x_vec, y_vec, r_vec = self._coordinates(x_dim, y_dim, scale = scale)
+    #for element in x_vec:
+    #   print element
+    #for element in y_vec:
+    #    print element
+    for i in range(len(r_vec)):
+        #r_vec[i] = 0
+        #x_vec[i] = 0
+        #y_vec[i] = 0
+        pass
+    #a = 1/0
     image = self.sess.run(G, feed_dict={self.z: z, self.x: x_vec, self.y: y_vec, self.r: r_vec})
+    #print image.shape
     return image
 
   def close(self):

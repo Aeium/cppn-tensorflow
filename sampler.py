@@ -33,9 +33,9 @@ import matplotlib.pyplot as plt
 import images2gif
 from images2gif import writeGif
 
-mgc = get_ipython().magic
-mgc(u'matplotlib inline')
-pylab.rcParams['figure.figsize'] = (10.0, 10.0)
+#mgc = get_ipython().magic
+#mgc(u'matplotlib inline')
+#pylab.rcParams['figure.figsize'] = (10.0, 10.0)
 
 class Sampler():
   def __init__(self, z_dim = 8, c_dim = 1, scale = 10.0, net_size = 32):
@@ -46,7 +46,7 @@ class Sampler():
   def generate_z(self):
     z = np.random.uniform(-1.0, 1.0, size=(1, self.cppn.z_dim)).astype(np.float32)
     return z
-  def generate(self, z=None, x_dim=1080, y_dim=1060, scale = 10.0):
+  def generate(self, z=None, x_dim=1060, y_dim=1060, scale = 10.0):
     if z is None:
       z = self.generate_z()
     else:
